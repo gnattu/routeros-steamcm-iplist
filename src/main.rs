@@ -63,7 +63,7 @@ async fn update_ip_list(
     let password: Option<&str> = Some(mikrotik_pass);
     let old_list_query: serde_json::Value = client
         .get(format!(
-            "https://{mikrotikAddress}/rest/ip/firewall/address-list?list={listName}",
+            "http://{mikrotikAddress}/rest/ip/firewall/address-list?list={listName}",
             mikrotikAddress = mikrotik_address,
             listName = list_name
         ))
@@ -81,7 +81,7 @@ async fn update_ip_list(
         for id in old_list_ids {
             let req = client
                 .delete(format!(
-                    "https://{mikrotikAddress}/rest/ip/firewall/address-list/{oldId}",
+                    "http://{mikrotikAddress}/rest/ip/firewall/address-list/{oldId}",
                     mikrotikAddress = mikrotik_address,
                     oldId = id
                 ))
@@ -100,7 +100,7 @@ async fn update_ip_list(
             };
             let req = client
                 .put(format!(
-                    "https://{mikrotikAddress}/rest/ip/firewall/address-list",
+                    "http://{mikrotikAddress}/rest/ip/firewall/address-list",
                     mikrotikAddress = mikrotik_address,
                 ))
                 .basic_auth(mikrotik_user, password)
